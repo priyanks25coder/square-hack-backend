@@ -52,8 +52,11 @@ app.post('/payment-link',async(req,res)=>{
         if(req.headers.authorization && req.headers.authorization.split(' ')[1] == auth_token && req.body){
             var obj = req.body
             const response = await client.checkoutApi.createPaymentLink(obj);
-            console.log(response.result);
-            res.status(201).send("Payment Link Created").end();
+            console.log();
+            res.status(201).send({
+                "url" : response.result.paymentLink.url,
+                "message" : "Payment Link Created"
+            }).end();
         }
         else res.status(401).send("Invalid Request").end();
     } 
