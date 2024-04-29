@@ -15,12 +15,12 @@ const client = new Client({
     environment: Environment.Sandbox
 });
 
-const auth_token = process.env.AUTH_TOKEN
+// const auth_token = process.env.AUTH_TOKEN
 
 
 app.get('/get-catalog',async(req,res)=>{
     try {
-        if(req.headers.authorization && req.headers.authorization.split(' ')[1] == auth_token){
+        // if(req.headers.authorization && req.headers.authorization.split(' ')[1] == auth_token){
             const response = await client.catalogApi.listCatalog();
             var sqObj = response.result.objects;
             var finObj = []
@@ -39,8 +39,8 @@ app.get('/get-catalog',async(req,res)=>{
                 finObj.push(currObj)
             }
             res.status(200).send(finObj).end();
-        }
-        else res.status(401).send("Invalid Request").end();
+        // }
+        // else res.status(401).send("Invalid Request").end();
     } 
     catch(error) {
         res.status(500).send(error.message).end();
@@ -49,10 +49,10 @@ app.get('/get-catalog',async(req,res)=>{
 
 app.post('/payment-link',async(req,res)=>{
     try {
-        if(req.headers.authorization && req.headers.authorization.split(' ')[1] == auth_token && req.body){
+        if(req.body){
             var obj = req.body
             const response = await client.checkoutApi.createPaymentLink(obj);
-            console.log();
+            // console.log();
             res.status(201).send({
                 "url" : response.result.paymentLink.url,
                 "message" : "Payment Link Created"
