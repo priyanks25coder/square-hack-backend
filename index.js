@@ -33,7 +33,10 @@ app.get('/get-catalog',async(req,res)=>{
                 // console.log(obj.itemData.variations[0].itemVariationData.priceMoney)
                 var currObj = {
                     'name' : obj.itemData.name,
-                    'price' : obj.itemData.variations[0].itemVariationData.priceMoney,
+                    'price' : {
+                        'amount':Number(obj.itemData.variations[0].itemVariationData.priceMoney.amount),
+                        'currency':(obj.itemData.variations[0].itemVariationData.priceMoney.currency)
+                    },
                     'description' : obj.itemData.descriptionHtml,
                     'image_url' : image_url
                 }
