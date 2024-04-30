@@ -30,9 +30,10 @@ app.get('/get-catalog',async(req,res)=>{
                 const img_response = await client.catalogApi.retrieveCatalogObject(image_id,true,undefined,true);
                 var imgObj = img_response.result.object;
                 var image_url = imgObj.imageData.url;
+                // console.log(obj.itemData.variations[0].itemVariationData.priceMoney)
                 var currObj = {
                     'name' : obj.itemData.name,
-                    'price' : obj.itemData.variations[0].priceMoney,
+                    'price' : obj.itemData.variations[0].itemVariationData.priceMoney,
                     'description' : obj.itemData.descriptionHtml,
                     'image_url' : image_url
                 }
